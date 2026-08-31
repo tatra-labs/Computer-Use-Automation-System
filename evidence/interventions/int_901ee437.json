@@ -1,0 +1,90 @@
+{
+  "id": "int_901ee437",
+  "createdAt": "2026-08-31T10:13:43.096Z",
+  "status": "resolved",
+  "mode": "replay",
+  "reason": "CONFIRMATION_REQUIRED",
+  "summary": "CONFIRMATION_REQUIRED: risk class \"irreversible\" requires confirmation",
+  "runId": "subacct-replay-escalate2",
+  "sessionId": "ses_29b23470",
+  "capability": {
+    "id": "cap_open_member_subaccount",
+    "name": "open_member_subaccount",
+    "version": 1
+  },
+  "tenant": null,
+  "step": {
+    "id": "s7",
+    "intent": "All three fields are populated (SV2 sub type, nickname, initial deposit). Submitting opens the sub-account and posts the opening deposit — irreversible. The next screen should be the posting confirmation with a reference number.",
+    "action": "click"
+  },
+  "state": {
+    "locus": "http://127.0.0.1:8078/",
+    "title": "MERIDIAN CORE R7.4",
+    "visibleText": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+    "controlSummary": [
+      "link \"MAIN MENU\" @nav",
+      "link \"01 MEMBER INQUIRY\" @nav",
+      "link \"07 SUB-ACCOUNT\" @nav",
+      "link \"99 SIGN OFF\" @nav",
+      "cell \"MERIDIAN CORE R7.4\" @nav",
+      "cell \"FIRST MERIDIAN FCU | NAV\" @nav",
+      "combobox \"SUB TYPE:\" @main",
+      "textbox \"NICKNAME:\" @main",
+      "textbox \"INIT DEP:\" @main",
+      "button \"OPEN SUB-ACCOUNT\" @main",
+      "cell \"MERIDIAN CORE R7.4\" @main",
+      "cell \"FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN\" @main",
+      "cell \"MBR NO:\" @main",
+      "cell \"23456\" @main",
+      "cell \"SUB TYPE:\" @main",
+      "cell \"NICKNAME:\" @main",
+      "cell \"INIT DEP:\" @main",
+      "cell \"MBR NO:\" @main"
+    ]
+  },
+  "screenshot": "evidence/replay-subacct-replay-escalate2/screens/044-escalation-confirmation-required.png",
+  "askedFor": [
+    "Approve this irreversible step: All three fields are populated (SV2 sub type, nickname, initial deposit). Submitting opens the sub-account and posts the opening deposit — irreversible. The next screen should be the posting confirmation with a reference number.",
+    "Or abort the run"
+  ],
+  "permitted": {
+    "actions": [
+      "navigate",
+      "click",
+      "type",
+      "select",
+      "press",
+      "dialog",
+      "waitFor",
+      "assert",
+      "extract",
+      "observe",
+      "screenshot"
+    ],
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ]
+  },
+  "lease": {
+    "owner": "automation",
+    "epoch": 3,
+    "holder": "automation",
+    "since": "2026-08-31T10:13:43.098Z",
+    "reason": "approved: sub-account opening is within this operator's authority"
+  },
+  "resolution": {
+    "at": "2026-08-31T10:13:43.098Z",
+    "by": "sim.duty-officer",
+    "decision": "resumed",
+    "note": "approved: sub-account opening is within this operator's authority",
+    "humanActions": [
+      {
+        "at": "2026-08-31T10:13:43.098Z",
+        "kind": "note",
+        "detail": "reviewed \"CONFIRMATION_REQUIRED: risk class \"irreversible\" requires confirmation\" on the live screen and approved it"
+      }
+    ]
+  }
+}

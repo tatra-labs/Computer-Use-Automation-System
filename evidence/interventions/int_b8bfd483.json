@@ -1,0 +1,81 @@
+{
+  "id": "int_b8bfd483",
+  "createdAt": "2026-08-31T10:21:57.491Z",
+  "status": "resolved",
+  "mode": "discovery",
+  "reason": "CONFIRMATION_REQUIRED",
+  "summary": "A irreversible action needs approval: All fields are populated: SUB TYPE SV2, nickname, and initial deposit. The only remaining step is to submit the opening, which posts the new sub-account and the deposit — an irreversible action.",
+  "runId": "subacct-final",
+  "sessionId": "ses_7b1c1b2a",
+  "goal": "Open a new secondary savings sub-account for member {{memberId}} with nickname {{nickname}} and an initial deposit of {{initialDeposit}}, and reach the posting confirmation screen showing the reference number. Start from member inquiry: look the member up first, then use sub-account maintenance.",
+  "tenant": null,
+  "state": {
+    "locus": "http://127.0.0.1:8078/",
+    "title": "MERIDIAN CORE R7.4",
+    "visibleText": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+    "controlSummary": [
+      "link \"MAIN MENU\" @nav",
+      "link \"01 MEMBER INQUIRY\" @nav",
+      "link \"07 SUB-ACCOUNT\" @nav",
+      "link \"99 SIGN OFF\" @nav",
+      "cell \"MERIDIAN CORE R7.4\" @nav",
+      "cell \"FIRST MERIDIAN FCU | NAV\" @nav",
+      "combobox \"SUB TYPE:\" @main",
+      "textbox \"NICKNAME:\" @main",
+      "textbox \"INIT DEP:\" @main",
+      "button \"OPEN SUB-ACCOUNT\" @main",
+      "cell \"MERIDIAN CORE R7.4\" @main",
+      "cell \"FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN\" @main",
+      "cell \"MBR NO:\" @main",
+      "cell \"23456\" @main",
+      "cell \"SUB TYPE:\" @main",
+      "cell \"NICKNAME:\" @main",
+      "cell \"INIT DEP:\" @main",
+      "cell \"MBR NO:\" @main"
+    ]
+  },
+  "screenshot": "evidence/discovery-subacct-final/screens/045-escalation-confirmation-required.png",
+  "askedFor": [
+    "Approve this irreversible action",
+    "Or abort the discovery run"
+  ],
+  "permitted": {
+    "actions": [
+      "navigate",
+      "click",
+      "type",
+      "select",
+      "press",
+      "dialog",
+      "waitFor",
+      "assert",
+      "extract",
+      "observe",
+      "screenshot"
+    ],
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ]
+  },
+  "lease": {
+    "owner": "automation",
+    "epoch": 3,
+    "holder": "automation",
+    "since": "2026-08-31T10:21:57.493Z",
+    "reason": "approved: sub-account opening is within this operator's authority"
+  },
+  "resolution": {
+    "at": "2026-08-31T10:21:57.493Z",
+    "by": "sim.duty-officer",
+    "decision": "resumed",
+    "note": "approved: sub-account opening is within this operator's authority",
+    "humanActions": [
+      {
+        "at": "2026-08-31T10:21:57.493Z",
+        "kind": "note",
+        "detail": "reviewed \"A irreversible action needs approval: All fields are populated: SUB TYPE SV2, nickname, and initial deposit. The only remaining step is to submit the opening, which posts the new sub-account and the deposit — an irreversible action.\" on the live screen and approved it"
+      }
+    ]
+  }
+}

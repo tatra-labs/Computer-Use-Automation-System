@@ -1,0 +1,79 @@
+{
+  "id": "int_5eb5a158",
+  "createdAt": "2026-08-31T10:13:43.430Z",
+  "status": "resolved",
+  "mode": "replay",
+  "reason": "CONFIRMATION_REQUIRED",
+  "summary": "CONFIRMATION_REQUIRED: risk class \"irreversible\" requires confirmation",
+  "runId": "subacct-replay-escalate2",
+  "sessionId": "ses_29b23470",
+  "capability": {
+    "id": "cap_open_member_subaccount",
+    "name": "open_member_subaccount",
+    "version": 1
+  },
+  "tenant": null,
+  "step": {
+    "id": "s8",
+    "intent": "The confirm dialog is the final gate on the intended sub-account opening and deposit posting, which is exactly the goal. Accept it to post and reach the confirmation screen with the reference number.",
+    "action": "dialog"
+  },
+  "state": {
+    "locus": "http://127.0.0.1:8078/",
+    "title": "(dialog)",
+    "visibleText": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE.",
+    "controlSummary": [],
+    "pendingDialog": {
+      "kind": "confirm",
+      "message": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE."
+    }
+  },
+  "askedFor": [
+    "Approve this irreversible step: The confirm dialog is the final gate on the intended sub-account opening and deposit posting, which is exactly the goal. Accept it to post and reach the confirmation screen with the reference number.",
+    "Or abort the run"
+  ],
+  "permitted": {
+    "actions": [
+      "navigate",
+      "click",
+      "type",
+      "select",
+      "press",
+      "dialog",
+      "waitFor",
+      "assert",
+      "extract",
+      "observe",
+      "screenshot"
+    ],
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ]
+  },
+  "lease": {
+    "owner": "automation",
+    "epoch": 5,
+    "holder": "automation",
+    "since": "2026-08-31T10:13:43.431Z",
+    "reason": "approved: sub-account opening is within this operator's authority"
+  },
+  "resolution": {
+    "at": "2026-08-31T10:13:43.431Z",
+    "by": "sim.duty-officer",
+    "decision": "resumed",
+    "note": "approved: sub-account opening is within this operator's authority",
+    "humanActions": [
+      {
+        "at": "2026-08-31T10:13:43.098Z",
+        "kind": "note",
+        "detail": "reviewed \"CONFIRMATION_REQUIRED: risk class \"irreversible\" requires confirmation\" on the live screen and approved it"
+      },
+      {
+        "at": "2026-08-31T10:13:43.431Z",
+        "kind": "note",
+        "detail": "reviewed \"CONFIRMATION_REQUIRED: risk class \"irreversible\" requires confirmation\" on the live screen and approved it"
+      }
+    ]
+  }
+}

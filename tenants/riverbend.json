@@ -1,0 +1,29 @@
+{
+  "kind": "tenant-overlay",
+  "schemaVersion": "handspan.tenant-overlay/v1",
+  "tenant": "riverbend-cu",
+  "productId": "meridian-core",
+  "variant": "riverbend",
+  "//": "Riverbend runs the same vendor product (Meridian Core) as the base tenant it was recorded against, on a newer point release with different field captions and routes, plus a forced post-login compliance notice. Nothing here re-records a single step \u2014 every capability recorded against 'base' is reused as-is, specialized only by caption synonyms.",
+  "app": {
+    "entry": "http://127.0.0.1:8079/"
+  },
+  "labelSynonyms": {
+    "MBR NO": [
+      "MEMBER NUMBER"
+    ],
+    "INQUIRE": [
+      "SEARCH"
+    ],
+    "REG SAVINGS": [
+      "SAVINGS BALANCE"
+    ],
+    "CHECKING": [
+      "SHARE DRAFT"
+    ],
+    "OPEN SUB-ACCOUNT": [
+      "CREATE SUB-ACCOUNT"
+    ]
+  },
+  "//2": "forceNoticeAfterLogin (riverbend's SYSTEM NOTICE interstitial) needs no entry here at all: it is cleared by app-profiles/meridian-core.json's MAINTENANCE_NOTICE recovery rule, which is product-wide and was written before either tenant existed. That is the point of splitting recovery/fault/outcome rules into the shared profile \u2014 a per-tenant quirk that is really an application STATE, not a caption, costs the overlay nothing."
+}

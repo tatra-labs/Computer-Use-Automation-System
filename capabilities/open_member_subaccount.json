@@ -1,0 +1,475 @@
+{
+  "kind": "capability",
+  "schemaVersion": "handspan.capability/v1",
+  "id": "cap_open_member_subaccount",
+  "name": "open_member_subaccount",
+  "version": 1,
+  "title": "Open a secondary savings sub-account for a member and reach the posting confirmation",
+  "description": "Open a new secondary savings sub-account for member {{memberId}} with nickname {{nickname}} and an initial deposit of {{initialDeposit}}, and reach the posting confirmation screen showing the reference number. Start from member inquiry: look the member up first, then use sub-account maintenance. (recorded against meridian-core variant \"base\")",
+  "app": {
+    "productId": "meridian-core",
+    "variant": "base",
+    "surface": "web",
+    "entry": "http://127.0.0.1:8078/",
+    "profile": "app-profiles/meridian-core.json"
+  },
+  "contract": {
+    "inputs": [
+      {
+        "name": "memberId",
+        "type": "integer",
+        "required": true,
+        "description": "The institution's 5-digit member number",
+        "sensitivity": "internal",
+        "pattern": "^\\d{5}$",
+        "example": "23456"
+      },
+      {
+        "name": "nickname",
+        "type": "string",
+        "required": true,
+        "description": "Operator-facing nickname for the new sub-account",
+        "sensitivity": "internal",
+        "pattern": "^[A-Za-z0-9 ._-]{1,20}$",
+        "example": "HOLIDAY FUND"
+      },
+      {
+        "name": "initialDeposit",
+        "type": "money",
+        "required": true,
+        "description": "Opening deposit amount in dollars",
+        "sensitivity": "internal",
+        "pattern": "^\\d+(\\.\\d{2})?$",
+        "example": "25.00"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "reference_number",
+        "type": "string",
+        "description": "The core-generated reference number for the sub-account opening posting, used to trace the transaction.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "REFERENCE NO:",
+              "{{memberId}}"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 1,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"REFERENCE NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      },
+      {
+        "name": "posting_result",
+        "type": "string",
+        "description": "The result status of the sub-account opening posting, e.g. ACCEPTED.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "RESULT:",
+              "{{memberId}}"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 1,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"RESULT:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      },
+      {
+        "name": "member_number",
+        "type": "string",
+        "description": "The member number the new secondary savings sub-account was opened under.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "MBR NO:"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 2,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 2; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "intent": "Start with member inquiry as instructed. Click the MEMBER INQUIRY link in the main frame.",
+      "action": {
+        "kind": "click",
+        "target": {
+          "role": "link",
+          "name": {
+            "value": "MEMBER INQUIRY",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [
+            "main"
+          ],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on accessible name \"MEMBER INQUIRY\"; disambiguated by frame path; re-resolved to the same control at 0.97"
+        }
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "controlPresent",
+        "target": {
+          "role": "button",
+          "name": {
+            "value": "INQUIRE",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08
+        }
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field and submit with Enter to run the inquiry.",
+      "action": {
+        "kind": "type",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "MBR NO:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "text": {
+          "kind": "param",
+          "param": "memberId"
+        },
+        "clearFirst": true,
+        "pressEnter": true
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "textMatches",
+        "pattern": "CURRENT BALANCE"
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s3",
+      "intent": "Member detail is loaded. Proceed to sub-account maintenance via the OPEN SUB-ACCOUNT link so the member context carries over.",
+      "action": {
+        "kind": "click",
+        "target": {
+          "role": "link",
+          "name": {
+            "value": "OPEN SUB-ACCOUNT",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on accessible name \"OPEN SUB-ACCOUNT\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        }
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "controlPresent",
+        "target": {
+          "role": "button",
+          "name": {
+            "value": "OPEN SUB-ACCOUNT",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08
+        }
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s4",
+      "intent": "SUB TYPE is already SV2 - SECONDARY SAVINGS, which is the required type. Fill the NICKNAME field with the parameter token next.",
+      "action": {
+        "kind": "type",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "NICKNAME:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"NICKNAME:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "text": {
+          "kind": "param",
+          "param": "nickname"
+        },
+        "clearFirst": true,
+        "pressEnter": false
+      },
+      "risk": "write",
+      "checkpoint": {
+        "kind": "controlValueMatches",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "NICKNAME:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"NICKNAME:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "pattern": "^{{nickname}}$"
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s5",
+      "intent": "Nickname is filled. Now enter the initial deposit amount token into the INIT DEP field. Do NOT press Enter, since submitting would post the account opening — that should be a separate, explicitly labeled irreversible click.",
+      "action": {
+        "kind": "type",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "INIT DEP:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"INIT DEP:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "text": {
+          "kind": "param",
+          "param": "initialDeposit"
+        },
+        "clearFirst": true,
+        "pressEnter": false
+      },
+      "risk": "write",
+      "checkpoint": {
+        "kind": "controlValueMatches",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "INIT DEP:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"INIT DEP:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "pattern": "^{{initialDeposit}}$"
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s6",
+      "intent": "All fields are populated: SUB TYPE SV2, nickname, and initial deposit. The only remaining step is to submit the opening, which posts the new sub-account and the deposit — an irreversible action.",
+      "action": {
+        "kind": "click",
+        "target": {
+          "role": "button",
+          "name": {
+            "value": "OPEN SUB-ACCOUNT",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on accessible name \"OPEN SUB-ACCOUNT\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        }
+      },
+      "risk": "irreversible",
+      "checkpoint": {
+        "kind": "dialogPresent"
+      },
+      "timeoutMs": 10000,
+      "retries": 0,
+      "optional": false
+    },
+    {
+      "id": "s7",
+      "intent": "The confirm dialog is the final step of the intended irreversible posting. Accept it to post the new sub-account and reach the confirmation screen with the reference number.",
+      "action": {
+        "kind": "dialog",
+        "decision": "accept"
+      },
+      "risk": "irreversible",
+      "checkpoint": {
+        "kind": "all",
+        "of": [
+          {
+            "kind": "textMatches",
+            "pattern": "REFERENCE"
+          },
+          {
+            "kind": "not",
+            "of": {
+              "kind": "dialogPresent"
+            }
+          }
+        ]
+      },
+      "timeoutMs": 15000,
+      "retries": 0,
+      "optional": false
+    }
+  ],
+  "successCondition": {
+    "kind": "all",
+    "of": [
+      {
+        "kind": "textMatches",
+        "pattern": "POSTING COMPLETE"
+      },
+      {
+        "kind": "controlPresent",
+        "target": {
+          "role": "cell",
+          "labels": [
+            "REFERENCE NO:",
+            "{{memberId}}"
+          ],
+          "container": [],
+          "frame": [],
+          "ordinal": 1,
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"REFERENCE NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+        }
+      },
+      {
+        "kind": "controlPresent",
+        "target": {
+          "role": "cell",
+          "labels": [
+            "RESULT:",
+            "{{memberId}}"
+          ],
+          "container": [],
+          "frame": [],
+          "ordinal": 1,
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"RESULT:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+        }
+      }
+    ]
+  },
+  "outcomes": [],
+  "recovery": [],
+  "faults": [],
+  "policy": {
+    "maxDurationMs": 180000,
+    "allowUnattended": false,
+    "requiresConfirmation": [
+      "irreversible"
+    ]
+  },
+  "provenance": {
+    "discoveredBy": "claude-opus-5",
+    "plannerProvider": "claude-cli",
+    "runId": "subacct-final",
+    "discoveredAt": "2026-08-31T10:22:13.631Z",
+    "entryFingerprint": "shape:a7af558fa5d7f894",
+    "llmSteps": 8,
+    "humanAssistedSteps": [
+      "turn-6",
+      "turn-7"
+    ],
+    "promptVersion": "discovery/v1"
+  },
+  "approval": {
+    "state": "draft",
+    "note": "discovery required human intervention; review the recorded gap before approving"
+  },
+  "stability": {
+    "replays": 0,
+    "successes": 0
+  }
+}

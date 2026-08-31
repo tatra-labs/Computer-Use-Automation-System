@@ -1,0 +1,583 @@
+{
+  "status": "success",
+  "llmCalls": 8,
+  "humanAssisted": [
+    "turn-6",
+    "turn-7"
+  ],
+  "successText": "POSTING COMPLETE",
+  "recorded": [
+    {
+      "seq": 1,
+      "intent": "Start with member inquiry as instructed. Click the MEMBER INQUIRY link in the main frame.",
+      "risk": "read",
+      "kind": "click",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [
+          "main"
+        ],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "link",
+        "name": {
+          "value": "MEMBER INQUIRY",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on accessible name \"MEMBER INQUIRY\"; disambiguated by frame path; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "pressEnter": false,
+      "expectAfter": "MEMBER INQUIRY",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:20e3242af26a7833",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MAIN MENU FUNCTION MENU CD FUNCTION 01 MEMBER INQUIRY 07 SUB-ACCOUNT MAINTENANCE",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "link\u001fMEMBER INQUIRY",
+          "link\u001fSUB-ACCOUNT MAINTENANCE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MAIN MENU",
+          "columnheader\u001fCD",
+          "columnheader\u001fFUNCTION",
+          "cell\u001f01",
+          "cell\u001f07"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 2,
+      "intent": "Enter the member number parameter token into the MBR NO field and submit with Enter to run the inquiry.",
+      "risk": "read",
+      "kind": "type",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "textbox",
+        "name": {
+          "value": "MBR NO:",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "text": {
+        "kind": "param",
+        "param": "memberId"
+      },
+      "pressEnter": true,
+      "expectAfter": "CURRENT BALANCE",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:9d8686597fcff807",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER DETAIL MBR: 23456 NAME: OYELARAN, MARCUS T SSN: «ssn» BRANCH: 004 STATUS: ACTIVE SHARE / DEPOSIT ACCOUNTS ACCT TYPE CURRENT BALANCE OPENED 0001 REG SAVINGS 150.00 2021-01-19 OPEN SUB-ACCOUNT | NEW INQUIRY",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "link\u001fOPEN SUB-ACCOUNT",
+          "link\u001fNEW INQUIRY",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER DETAIL",
+          "cell\u001fMBR:",
+          "cell\u001f23456",
+          "cell\u001fNAME:",
+          "cell\u001fOYELARAN, MARCUS T",
+          "cell\u001fSSN:",
+          "cell\u001f«ssn»",
+          "cell\u001fBRANCH:",
+          "cell\u001f004",
+          "cell\u001fSTATUS:",
+          "cell\u001fACTIVE",
+          "columnheader\u001fACCT",
+          "columnheader\u001fTYPE",
+          "columnheader\u001fCURRENT BALANCE",
+          "columnheader\u001fOPENED",
+          "cell\u001f0001",
+          "cell\u001fREG SAVINGS",
+          "cell\u001f150.00",
+          "cell\u001f2021-01-19"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 3,
+      "intent": "Member detail is loaded. Proceed to sub-account maintenance via the OPEN SUB-ACCOUNT link so the member context carries over.",
+      "risk": "read",
+      "kind": "click",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "link",
+        "name": {
+          "value": "OPEN SUB-ACCOUNT",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on accessible name \"OPEN SUB-ACCOUNT\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "pressEnter": false,
+      "expectAfter": "SUB-ACCOUNT MAINTENANCE",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:9d8686597fcff807",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER DETAIL MBR: 23456 NAME: OYELARAN, MARCUS T SSN: «ssn» BRANCH: 004 STATUS: ACTIVE SHARE / DEPOSIT ACCOUNTS ACCT TYPE CURRENT BALANCE OPENED 0001 REG SAVINGS 150.00 2021-01-19 OPEN SUB-ACCOUNT | NEW INQUIRY",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "link\u001fOPEN SUB-ACCOUNT",
+          "link\u001fNEW INQUIRY",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER DETAIL",
+          "cell\u001fMBR:",
+          "cell\u001f23456",
+          "cell\u001fNAME:",
+          "cell\u001fOYELARAN, MARCUS T",
+          "cell\u001fSSN:",
+          "cell\u001f«ssn»",
+          "cell\u001fBRANCH:",
+          "cell\u001f004",
+          "cell\u001fSTATUS:",
+          "cell\u001fACTIVE",
+          "columnheader\u001fACCT",
+          "columnheader\u001fTYPE",
+          "columnheader\u001fCURRENT BALANCE",
+          "columnheader\u001fOPENED",
+          "cell\u001f0001",
+          "cell\u001fREG SAVINGS",
+          "cell\u001f150.00",
+          "cell\u001f2021-01-19"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 4,
+      "intent": "SUB TYPE is already SV2 - SECONDARY SAVINGS, which is the required type. Fill the NICKNAME field with the parameter token next.",
+      "risk": "write",
+      "kind": "type",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "textbox",
+        "name": {
+          "value": "NICKNAME:",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on inferred caption (adjacent cell / column header) \"NICKNAME:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "text": {
+        "kind": "param",
+        "param": "nickname"
+      },
+      "pressEnter": false,
+      "expectAfter": "INIT DEP:",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 5,
+      "intent": "Nickname is filled. Now enter the initial deposit amount token into the INIT DEP field. Do NOT press Enter, since submitting would post the account opening — that should be a separate, explicitly labeled irreversible click.",
+      "risk": "write",
+      "kind": "type",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "textbox",
+        "name": {
+          "value": "INIT DEP:",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on inferred caption (adjacent cell / column header) \"INIT DEP:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "text": {
+        "kind": "param",
+        "param": "initialDeposit"
+      },
+      "pressEnter": false,
+      "expectAfter": "OPEN SUB-ACCOUNT",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 6,
+      "intent": "All fields are populated: SUB TYPE SV2, nickname, and initial deposit. The only remaining step is to submit the opening, which posts the new sub-account and the deposit — an irreversible action.",
+      "risk": "irreversible",
+      "kind": "click",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "button",
+        "name": {
+          "value": "OPEN SUB-ACCOUNT",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on accessible name \"OPEN SUB-ACCOUNT\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "pressEnter": false,
+      "expectAfter": "REFERENCE",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:ca12a4224352cf55",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "combobox\u001fSUB TYPE:",
+          "textbox\u001fNICKNAME:",
+          "textbox\u001fINIT DEP:",
+          "button\u001fOPEN SUB-ACCOUNT",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fSUB TYPE:",
+          "cell\u001fNICKNAME:",
+          "cell\u001fINIT DEP:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "(dialog)",
+        "fingerprint": "dialog:4bf2c9860bc9",
+        "text": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE.",
+        "keys": [],
+        "dialog": true
+      }
+    },
+    {
+      "seq": 7,
+      "intent": "The confirm dialog is the final step of the intended irreversible posting. Accept it to post the new sub-account and reach the confirmation screen with the reference number.",
+      "risk": "irreversible",
+      "kind": "dialog",
+      "decision": "accept",
+      "expectAfter": "REFERENCE",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "(dialog)",
+        "fingerprint": "dialog:4bf2c9860bc9",
+        "text": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE.",
+        "keys": [],
+        "dialog": true
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:6a3d268a08fe3cee",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT CONFIRMATION POSTING COMPLETE MBR NO: 23456 REFERENCE NO: SA-4412 RESULT: ACCEPTED",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | SUB-ACCOUNT CONFIRMATION",
+          "cell\u001fPOSTING COMPLETE MBR NO: 23456 REFERENCE NO: SA-4412 RESULT: ACCEPTED",
+          "cell\u001fMBR NO:",
+          "cell\u001f23456",
+          "cell\u001fREFERENCE NO:",
+          "cell\u001fSA-4412",
+          "cell\u001fRESULT:",
+          "cell\u001fACCEPTED"
+        ],
+        "dialog": false
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "name": "reference_number",
+      "type": "string",
+      "description": "The core-generated reference number for the sub-account opening posting, used to trace the transaction.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "REFERENCE NO:",
+          "23456"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 1,
+        "note": "matched on inferred caption (adjacent cell / column header) \"REFERENCE NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"REFERENCE NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "SA-4412"
+    },
+    {
+      "name": "posting_result",
+      "type": "string",
+      "description": "The result status of the sub-account opening posting, e.g. ACCEPTED.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "RESULT:",
+          "23456"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 1,
+        "note": "matched on inferred caption (adjacent cell / column header) \"RESULT:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"RESULT:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "ACCEPTED"
+    },
+    {
+      "name": "member_number",
+      "type": "string",
+      "description": "The member number the new secondary savings sub-account was opened under.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "MBR NO:"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 2,
+        "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 2; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 2; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "23456"
+    }
+  ]
+}

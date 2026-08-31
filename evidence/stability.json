@@ -1,0 +1,22 @@
+{
+  "runs": 3,
+  "successes": 3,
+  "successRate": 1,
+  "distinctOutputShapes": 1,
+  "deterministic": true,
+  "statuses": [
+    "success",
+    "success",
+    "success"
+  ],
+  "durationsMs": [
+    1215,
+    1180,
+    1198
+  ],
+  "evidence": [
+    "evidence/replay-stab1-942ac0",
+    "evidence/replay-stab2-b69d58",
+    "evidence/replay-stab3-c7a882"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "//": "The single guardrail configuration. Every surface action in discovery and replay passes through PolicyGate.check() against this file.",
+
+  "allowlist": {
+    "//": "Loci are anchored regexes. Anything not matched is refused before the driver is touched — including a navigation the model invents.",
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ],
+    "actions": [
+      "navigate", "click", "type", "select", "press", "dialog",
+      "waitFor", "assert", "extract", "observe", "screenshot"
+    ]
+  },
+
+  "risk": {
+    "//": "read/write proceed; irreversible needs an explicit per-invocation confirmation or a human decision obtained through escalation. Blocking it outright would make the system useless for the servicing work it exists to do; letting it through unattended is how you double-post a transaction.",
+    "read": "allow",
+    "write": "allow",
+    "irreversible": "confirm"
+  },
+
+  "limits": {
+    "maxSteps": 40,
+    "maxDurationMs": 300000,
+    "maxLlmCalls": 30,
+    "maxNavigations": 25
+  },
+
+  "unattended": {
+    "requireApproved": true,
+    "minSuccessRate": 0
+  },
+
+  "redaction": {
+    "//": "Institution-specific patterns layered on top of the built-in ones (SSN, PAN, email, JWT, credential assignments).",
+    "extraPatterns": [
+      "\\bTRACE ID [A-Z0-9]{6,}\\b"
+    ]
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "id": "obs30",
+  "locus": "http://127.0.0.1:8078/",
+  "title": "MERIDIAN CORE R7.4",
+  "fingerprint": "shape:ca12a4224352cf55",
+  "frames": [
+    {
+      "name": "(root)",
+      "url": "http://127.0.0.1:8078/"
+    },
+    {
+      "name": "nav",
+      "url": "http://127.0.0.1:8078/nav"
+    },
+    {
+      "name": "main",
+      "url": "http://127.0.0.1:8078/svc/subacct?mbr=23456"
+    }
+  ],
+  "controls": [
+    {
+      "ref": "f1c0",
+      "role": "link",
+      "name": "MAIN MENU",
+      "labels": [
+        "NAVIGATION"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 104,
+        "w": 96,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c1",
+      "role": "link",
+      "name": "01 MEMBER INQUIRY",
+      "labels": [
+        "MAIN MENU"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 142,
+        "w": 95,
+        "h": 38
+      }
+    },
+    {
+      "ref": "f1c2",
+      "role": "link",
+      "name": "07 SUB-ACCOUNT",
+      "labels": [
+        "01 MEMBER INQUIRY"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 199,
+        "w": 146,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c3",
+      "role": "link",
+      "name": "99 SIGN OFF",
+      "labels": [
+        "07 SUB-ACCOUNT"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 237,
+        "w": 105,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c4",
+      "role": "cell",
+      "name": "MERIDIAN CORE R7.4",
+      "labels": [],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 176,
+        "h": 22
+      }
+    },
+    {
+      "ref": "f1c5",
+      "role": "cell",
+      "name": "FIRST MERIDIAN FCU | NAV",
+      "labels": [
+        "MERIDIAN CORE R7.4"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 22,
+        "w": 176,
+        "h": 42
+      }
+    },
+    {
+      "ref": "f2c0",
+      "role": "combobox",
+      "name": "",
+      "labels": [
+        "SUB TYPE:",
+        "23456"
+      ],
+      "value": "SV2",
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 121,
+        "y": 72,
+        "w": 178,
+        "h": 20
+      }
+    },
+    {
+      "ref": "f2c1",
+      "role": "textbox",
+      "name": "",
+      "labels": [
+        "NICKNAME:",
+        "23456"
+      ],
+      "value": "OP APPROVED",
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 121,
+        "y": 97,
+        "w": 147,
+        "h": 18
+      }
+    },
+    {
+      "ref": "f2c2",
+      "role": "textbox",
+      "name": "",
+      "labels": [
+        "INIT DEP:",
+        "23456"
+      ],
+      "value": "10.00",
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 121,
+        "y": 120,
+        "w": 77,
+        "h": 18
+      }
+    },
+    {
+      "ref": "f2c3",
+      "role": "button",
+      "name": "OPEN SUB-ACCOUNT",
+      "labels": [
+        "23456"
+      ],
+      "value": "OPEN SUB-ACCOUNT",
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 121,
+        "y": 142,
+        "w": 137,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f2c4",
+      "role": "cell",
+      "name": "MERIDIAN CORE R7.4",
+      "labels": [],
+      "container": [
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1103,
+        "h": 22
+      }
+    },
+    {
+      "ref": "f2c5",
+      "role": "cell",
+      "name": "FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN",
+      "labels": [
+        "MERIDIAN CORE R7.4"
+      ],
+      "container": [
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 22,
+        "w": 1103,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c6",
+      "role": "cell",
+      "name": "MBR NO:",
+      "labels": [
+        "23456"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 47,
+        "w": 113,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c7",
+      "role": "cell",
+      "name": "23456",
+      "labels": [
+        "MBR NO:"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 117,
+        "y": 47,
+        "w": 186,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c8",
+      "role": "cell",
+      "name": "SUB TYPE:",
+      "labels": [
+        "MBR NO:"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 70,
+        "w": 113,
+        "h": 24
+      }
+    },
+    {
+      "ref": "f2c9",
+      "role": "cell",
+      "name": "NICKNAME:",
+      "labels": [
+        "MBR NO:"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 94,
+        "w": 113,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c10",
+      "role": "cell",
+      "name": "INIT DEP:",
+      "labels": [
+        "MBR NO:"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 117,
+        "w": 113,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c11",
+      "role": "cell",
+      "name": "",
+      "labels": [
+        "MBR NO:"
+      ],
+      "container": [
+        "form:/svc/subacct",
+        "SUB-ACCOUNT OPEN"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 1,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 140,
+        "w": 113,
+        "h": 23
+      }
+    }
+  ],
+  "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | SUB-ACCOUNT OPEN MBR NO: 23456 SUB TYPE: SV2 - SECONDARY SAVINGS HOL - HOLIDAY CLUB NICKNAME: INIT DEP:"
+}

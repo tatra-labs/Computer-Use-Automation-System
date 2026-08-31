@@ -1,0 +1,30 @@
+{
+  "name": "handspan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Computer-use automation: LLM discovers a UI flow once, it becomes a typed capability artifact that replays deterministically with no model in the loop.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "app": "tsx target-app/server.ts --variant=base --port=8078",
+    "app:riverbend": "tsx target-app/server.ts --variant=riverbend --port=8079",
+    "cua": "tsx src/cli/index.ts",
+    "operator": "tsx src/cli/index.ts operator",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx scripts/demo.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "playwright": "^1.56.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

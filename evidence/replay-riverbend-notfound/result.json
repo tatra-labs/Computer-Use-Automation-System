@@ -1,0 +1,79 @@
+{
+  "runId": "riverbend-notfound",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": "riverbend-cu",
+  "status": "business_outcome",
+  "outputs": {},
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Start by opening the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 2,
+      "durationMs": 137,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field so the inquiry can be submitted.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 116,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.936
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"99999\" ~ /^99999$/ → true"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    },
+    {
+      "code": "MAINTENANCE_NOTICE",
+      "attempt": 1,
+      "ok": true,
+      "detail": "text ~ /SYSTEM NOTICE\\s*\\d+/i → true"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:1cae7aaeff91236b",
+    "changed": true
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:28:02.793Z",
+    "endedAt": "2026-08-31T10:28:24.192Z",
+    "durationMs": 21399
+  },
+  "evidence": {
+    "dir": "evidence/replay-riverbend-notfound",
+    "journal": "evidence/replay-riverbend-notfound/journal.jsonl",
+    "screenshots": []
+  },
+  "outcome": {
+    "code": "RECORD_NOT_FOUND",
+    "message": "No member record exists for the supplied member number"
+  }
+}

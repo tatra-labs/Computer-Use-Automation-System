@@ -1,0 +1,151 @@
+{
+  "runId": "subacct-final-replay",
+  "capability": {
+    "id": "cap_open_member_subaccount",
+    "name": "open_member_subaccount",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "success",
+  "outputs": {
+    "reference_number": "SA-4413",
+    "posting_result": "ACCEPTED",
+    "member_number": "23456"
+  },
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Start with member inquiry as instructed. Click the MEMBER INQUIRY link in the main frame.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 808,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field and submit with Enter to run the inquiry.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 208,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "text ~ /CURRENT BALANCE/i → true"
+      }
+    },
+    {
+      "stepId": "s3",
+      "intent": "Member detail is loaded. Proceed to sub-account maintenance via the OPEN SUB-ACCOUNT link so the member context carries over.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 157,
+      "target": "link exact(\"OPEN SUB-ACCOUNT\")",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.781
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s4",
+      "intent": "SUB TYPE is already SV2 - SECONDARY SAVINGS, which is the required type. Fill the NICKNAME field with the parameter token next.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 199,
+      "target": "textbox exact(\"NICKNAME:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"FINAL TEST\" ~ /^FINAL TEST$/ → true"
+      }
+    },
+    {
+      "stepId": "s5",
+      "intent": "Nickname is filled. Now enter the initial deposit amount token into the INIT DEP field. Do NOT press Enter, since submitting would post the account opening — that should be a separate, explicitly labeled irreversible click.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 129,
+      "target": "textbox exact(\"INIT DEP:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"15.00\" ~ /^15.00$/ → true"
+      }
+    },
+    {
+      "stepId": "s6",
+      "intent": "All fields are populated: SUB TYPE SV2, nickname, and initial deposit. The only remaining step is to submit the opening, which posts the new sub-account and the deposit — an irreversible action.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 91,
+      "target": "button exact(\"OPEN SUB-ACCOUNT\")",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.709
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "dialog(confirm)"
+      }
+    },
+    {
+      "stepId": "s7",
+      "intent": "The confirm dialog is the final step of the intended irreversible posting. Accept it to post the new sub-account and reach the confirmation screen with the reference number.",
+      "action": "dialog",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 82,
+      "checkpoint": {
+        "ok": true,
+        "detail": "all: ok"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:a7af558fa5d7f894",
+    "changed": false
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:22:24.946Z",
+    "endedAt": "2026-08-31T10:22:26.747Z",
+    "durationMs": 1802
+  },
+  "evidence": {
+    "dir": "evidence/replay-subacct-final-replay",
+    "journal": "evidence/replay-subacct-final-replay/journal.jsonl",
+    "screenshots": []
+  }
+}

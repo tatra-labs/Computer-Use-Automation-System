@@ -1,0 +1,160 @@
+{
+  "kind": "app-profile",
+  "schemaVersion": "handspan.app-profile/v1",
+  "productId": "meridian-core",
+  "title": "MERIDIAN CORE — member services",
+  "surface": "web",
+
+  "//": "Authored once per vendor product and shared by every capability recorded against it. This is where the exceptional-state vocabulary of the application lives: a happy-path recording cannot discover it, and re-deriving it per capability would be both wasteful and inconsistent.",
+
+  "auth": {
+    "//": "Sign-on is never discovered and never recorded into a capability. The model is not shown a credential, and the artifact stores env-var NAMES only.",
+    "detect": {
+      "kind": "any",
+      "of": [
+        { "kind": "controlPresent", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON", "LOGIN"] } } },
+        { "kind": "textMatches", "pattern": "SEC-0900" }
+      ]
+    },
+    "steps": [
+      {
+        "id": "s1",
+        "intent": "Enter the service operator id on the sign-on screen",
+        "risk": "read",
+        "action": {
+          "kind": "type",
+          "target": { "role": "textbox", "name": { "value": "OPER ID", "alternatives": ["OPERATOR ID", "USER ID", "USERID"] } },
+          "text": { "kind": "secretRef", "env": "TARGET_APP_USER" }
+        }
+      },
+      {
+        "id": "s2",
+        "intent": "Enter the service account password",
+        "risk": "read",
+        "action": {
+          "kind": "type",
+          "target": { "role": "password", "name": { "value": "PASSWORD", "alternatives": ["PASSWD", "PIN"] } },
+          "text": { "kind": "secretRef", "env": "TARGET_APP_PASSWORD" }
+        }
+      },
+      {
+        "id": "s3",
+        "intent": "Submit the sign-on form",
+        "risk": "read",
+        "action": { "kind": "click", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON"] } } },
+        "checkpoint": {
+          "kind": "not",
+          "of": { "kind": "controlPresent", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON"] } } }
+        },
+        "timeoutMs": 12000
+      }
+    ]
+  },
+
+  "recovery": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "message": "The application session expired or timed out; signing on again",
+      "//": "Session expiry is the single most common runtime interruption in these apps. Modelling it as recovery — not a failure — is what lets a long capability survive an idle timeout mid-flow.",
+      "when": {
+        "kind": "any",
+        "of": [
+          { "kind": "controlPresent", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON"] } } },
+          { "kind": "textMatches", "pattern": "SEC-0900" }
+        ]
+      },
+      "maxAttempts": 2,
+      "retryStepAfter": true,
+      "actions": [
+        {
+          "id": "s1",
+          "intent": "Re-enter the service operator id",
+          "risk": "read",
+          "action": {
+            "kind": "type",
+            "target": { "role": "textbox", "name": { "value": "OPER ID", "alternatives": ["OPERATOR ID", "USER ID"] } },
+            "text": { "kind": "secretRef", "env": "TARGET_APP_USER" }
+          }
+        },
+        {
+          "id": "s2",
+          "intent": "Re-enter the service account password",
+          "risk": "read",
+          "action": {
+            "kind": "type",
+            "target": { "role": "password", "name": { "value": "PASSWORD", "alternatives": ["PASSWD"] } },
+            "text": { "kind": "secretRef", "env": "TARGET_APP_PASSWORD" }
+          }
+        },
+        {
+          "id": "s3",
+          "intent": "Sign on again",
+          "risk": "read",
+          "action": { "kind": "click", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON"] } } },
+          "checkpoint": {
+            "kind": "not",
+            "of": { "kind": "controlPresent", "target": { "role": "button", "name": { "value": "SIGN ON", "alternatives": ["SIGNON", "LOG ON"] } } }
+          },
+          "timeoutMs": 12000
+        }
+      ]
+    },
+    {
+      "code": "MAINTENANCE_NOTICE",
+      "message": "An operator notice is interrupting the flow; acknowledging it",
+      "when": { "kind": "textMatches", "pattern": "SYSTEM NOTICE\\s*\\d+" },
+      "maxAttempts": 3,
+      "retryStepAfter": true,
+      "actions": [
+        {
+          "id": "s1",
+          "intent": "Acknowledge the system notice",
+          "risk": "read",
+          "action": { "kind": "click", "target": { "role": "button", "name": { "value": "ACKNOWLEDGE", "alternatives": ["ACK", "CONTINUE", "OK"] } } },
+          "checkpoint": { "kind": "textAbsent", "pattern": "SYSTEM NOTICE\\s*\\d+" },
+          "timeoutMs": 12000
+        }
+      ]
+    }
+  ],
+
+  "faults": [
+    {
+      "code": "APP_ERROR_PAGE",
+      "message": "MERIDIAN CORE returned an unhandled application error (MCX-0500)",
+      "//": "Deliberately NOT modelled as recovery. Mid-transaction, a blind reload on a core banking screen risks double-posting; a person decides.",
+      "when": { "kind": "textMatches", "pattern": "MCX-0500" },
+      "escalate": true
+    },
+    {
+      "code": "FORM_VALIDATION_FAILED",
+      "message": "The application rejected a field this capability is responsible for filling (ERR-2001)",
+      "//": "A required field the recorded flow should always supply. If this fires, the capability is wrong — surface it as a defect, not as a business answer.",
+      "when": { "kind": "textMatches", "pattern": "ERR-2001" },
+      "escalate": false
+    }
+  ],
+
+  "outcomes": [
+    {
+      "code": "RECORD_NOT_FOUND",
+      "message": "No member record exists for the supplied member number",
+      "when": { "kind": "textMatches", "pattern": "ERR-1404" }
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "message": "The service account is not authorized for this member's branch",
+      "when": { "kind": "textMatches", "pattern": "SEC-4021" }
+    },
+    {
+      "code": "INPUT_REJECTED",
+      "message": "The application rejected the supplied member number as malformed",
+      "when": { "kind": "textMatches", "pattern": "ERR-1001" }
+    },
+    {
+      "code": "SUBACCOUNT_LIMIT_REACHED",
+      "message": "This member has reached the maximum number of sub-accounts",
+      "when": { "kind": "textMatches", "pattern": "ERR-2210" }
+    }
+  ]
+}

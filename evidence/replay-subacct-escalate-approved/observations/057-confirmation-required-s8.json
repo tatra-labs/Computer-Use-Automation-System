@@ -1,0 +1,13 @@
+{
+  "id": "obs36",
+  "locus": "http://127.0.0.1:8078/",
+  "title": "(dialog)",
+  "fingerprint": "dialog:4bf2c9860bc9",
+  "frames": [],
+  "pendingDialog": {
+    "kind": "confirm",
+    "message": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE."
+  },
+  "controls": [],
+  "text": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE."
+}

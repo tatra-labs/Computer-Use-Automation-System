@@ -1,0 +1,363 @@
+{
+  "kind": "capability",
+  "schemaVersion": "handspan.capability/v1",
+  "id": "cap_lookup_member_savings_balance",
+  "name": "lookup_member_savings_balance",
+  "version": 1,
+  "title": "Look up a member's current regular savings balance",
+  "description": "Look up member {{memberId}} in member inquiry and read their current regular savings balance from the member detail screen. (recorded against meridian-core variant \"base\")",
+  "app": {
+    "productId": "meridian-core",
+    "variant": "base",
+    "surface": "web",
+    "entry": "http://127.0.0.1:8078/",
+    "profile": "app-profiles/meridian-core.json"
+  },
+  "contract": {
+    "inputs": [
+      {
+        "name": "memberId",
+        "type": "integer",
+        "required": true,
+        "description": "The institution's 5-digit member number",
+        "sensitivity": "internal",
+        "pattern": "^\\d{5}$",
+        "example": "12345"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "regular_savings_balance",
+        "type": "string",
+        "description": "The current balance of the member's regular savings (acct 0001, REG SAVINGS) share account as shown on the member detail screen.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "REG SAVINGS",
+              "CURRENT BALANCE"
+            ],
+            "container": [],
+            "frame": [],
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"REG SAVINGS\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      },
+      {
+        "name": "member_name",
+        "type": "string",
+        "description": "The member's full name in LAST, FIRST M format as displayed on the member detail screen, used to confirm the correct member was retrieved.",
+        "sensitivity": "pii",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "NAME:",
+              "MBR:",
+              "{{memberId}}"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 3,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"NAME:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 3; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      },
+      {
+        "name": "member_number",
+        "type": "string",
+        "description": "The 5-digit member number echoed back on the member detail screen, confirming which member record the balance belongs to.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "MBR:",
+              "NAME:"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 1,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"MBR:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      },
+      {
+        "name": "account_status",
+        "type": "string",
+        "description": "The membership status shown on the detail screen (e.g. ACTIVE), indicating whether the member record is in good standing.",
+        "sensitivity": "internal",
+        "required": true,
+        "source": {
+          "kind": "controlText",
+          "target": {
+            "role": "cell",
+            "labels": [
+              "STATUS:"
+            ],
+            "container": [],
+            "frame": [],
+            "ordinal": 1,
+            "minScore": 0.55,
+            "minMargin": 0.08,
+            "note": "matched on inferred caption (adjacent cell / column header) \"STATUS:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+          }
+        },
+        "transform": [
+          "trim",
+          "collapseSpace"
+        ]
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "intent": "Start by opening the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": {
+        "kind": "click",
+        "target": {
+          "role": "link",
+          "name": {
+            "value": "MEMBER INQUIRY",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [
+            "main"
+          ],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on accessible name \"MEMBER INQUIRY\"; disambiguated by frame path; re-resolved to the same control at 0.97"
+        }
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "controlPresent",
+        "target": {
+          "role": "button",
+          "name": {
+            "value": "INQUIRE",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08
+        }
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field so the inquiry can be submitted.",
+      "action": {
+        "kind": "type",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "MBR NO:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "text": {
+          "kind": "param",
+          "param": "memberId"
+        },
+        "clearFirst": true,
+        "pressEnter": false
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "controlValueMatches",
+        "target": {
+          "role": "textbox",
+          "name": {
+            "value": "MBR NO:",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        },
+        "pattern": "^{{memberId}}$"
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    },
+    {
+      "id": "s3",
+      "intent": "The member number token is entered and service code is I (inquiry). Submit the inquiry to reach the member detail screen showing share/savings balances.",
+      "action": {
+        "kind": "click",
+        "target": {
+          "role": "button",
+          "name": {
+            "value": "INQUIRE",
+            "mode": "exact",
+            "alternatives": []
+          },
+          "labels": [],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on accessible name \"INQUIRE\"; unambiguous on its own; re-resolved to the same control at 0.97"
+        }
+      },
+      "risk": "read",
+      "checkpoint": {
+        "kind": "all",
+        "of": [
+          {
+            "kind": "controlPresent",
+            "target": {
+              "role": "link",
+              "name": {
+                "value": "OPEN SUB-ACCOUNT",
+                "mode": "exact",
+                "alternatives": []
+              },
+              "labels": [],
+              "container": [],
+              "frame": [],
+              "minScore": 0.55,
+              "minMargin": 0.08
+            }
+          },
+          {
+            "kind": "controlPresent",
+            "target": {
+              "role": "link",
+              "name": {
+                "value": "NEW INQUIRY",
+                "mode": "exact",
+                "alternatives": []
+              },
+              "labels": [],
+              "container": [],
+              "frame": [],
+              "minScore": 0.55,
+              "minMargin": 0.08
+            }
+          }
+        ]
+      },
+      "timeoutMs": 10000,
+      "retries": 1,
+      "optional": false
+    }
+  ],
+  "successCondition": {
+    "kind": "all",
+    "of": [
+      {
+        "kind": "textMatches",
+        "pattern": "SHARE / DEPOSIT ACCOUNTS"
+      },
+      {
+        "kind": "controlPresent",
+        "target": {
+          "role": "cell",
+          "labels": [
+            "REG SAVINGS",
+            "CURRENT BALANCE"
+          ],
+          "container": [],
+          "frame": [],
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"REG SAVINGS\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76"
+        }
+      },
+      {
+        "kind": "controlPresent",
+        "target": {
+          "role": "cell",
+          "labels": [
+            "NAME:",
+            "MBR:",
+            "{{memberId}}"
+          ],
+          "container": [],
+          "frame": [],
+          "ordinal": 3,
+          "minScore": 0.55,
+          "minMargin": 0.08,
+          "note": "matched on inferred caption (adjacent cell / column header) \"NAME:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 3; re-resolved to the same control at 0.76"
+        }
+      }
+    ]
+  },
+  "outcomes": [],
+  "recovery": [],
+  "faults": [],
+  "policy": {
+    "maxDurationMs": 120000,
+    "allowUnattended": true,
+    "requiresConfirmation": [
+      "irreversible"
+    ]
+  },
+  "provenance": {
+    "discoveredBy": "claude-opus-5",
+    "plannerProvider": "claude-cli",
+    "runId": "demo-mth3exre",
+    "discoveredAt": "2026-08-31T10:26:35.426Z",
+    "entryFingerprint": "shape:a7af558fa5d7f894",
+    "llmSteps": 4,
+    "humanAssistedSteps": [],
+    "promptVersion": "discovery/v1"
+  },
+  "approval": {
+    "state": "draft",
+    "note": "awaiting review"
+  },
+  "stability": {
+    "replays": 0,
+    "successes": 0
+  }
+}

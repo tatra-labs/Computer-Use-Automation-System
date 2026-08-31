@@ -1,0 +1,45 @@
+{
+  "runId": "evidence-fault-apperror",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "escalated",
+  "outputs": {},
+  "steps": [],
+  "recoveries": [],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:dea83869599bb41b",
+    "changed": true
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:27:44.896Z",
+    "endedAt": "2026-08-31T10:27:48.223Z",
+    "durationMs": 3327
+  },
+  "evidence": {
+    "dir": "evidence/replay-evidence-fault-apperror",
+    "journal": "evidence/replay-evidence-fault-apperror/journal.jsonl",
+    "screenshots": [
+      "evidence/replay-evidence-fault-apperror/screens/006-fault-app-error-page.png",
+      "evidence/replay-evidence-fault-apperror/screens/006-escalation-app-fault.png"
+    ],
+    "failureSnapshot": "evidence/replay-evidence-fault-apperror/snapshot-fault-app-error-page.html"
+  },
+  "escalation": {
+    "interventionId": "int_d54a16b4",
+    "reason": "APP_FAULT",
+    "stepId": "s1",
+    "resolvedBy": "system",
+    "resumed": false
+  },
+  "failure": {
+    "code": "APP_FAULT",
+    "message": "operator aborted: no operator responded within 3000ms",
+    "stepId": "s1",
+    "observed": "locus=http://127.0.0.1:8078/ title=\"MERIDIAN CORE R7.4\" alert=\"MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»\" controls=10"
+  }
+}

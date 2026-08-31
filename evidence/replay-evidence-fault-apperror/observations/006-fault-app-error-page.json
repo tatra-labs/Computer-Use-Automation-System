@@ -1,0 +1,235 @@
+{
+  "id": "obs2",
+  "locus": "http://127.0.0.1:8078/",
+  "title": "MERIDIAN CORE R7.4",
+  "fingerprint": "shape:dea83869599bb41b",
+  "frames": [
+    {
+      "name": "(root)",
+      "url": "http://127.0.0.1:8078/"
+    },
+    {
+      "name": "nav",
+      "url": "http://127.0.0.1:8078/nav"
+    },
+    {
+      "name": "main",
+      "url": "http://127.0.0.1:8078/main"
+    }
+  ],
+  "controls": [
+    {
+      "ref": "f1c0",
+      "role": "link",
+      "name": "MAIN MENU",
+      "labels": [
+        "NAVIGATION"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 104,
+        "w": 96,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c1",
+      "role": "link",
+      "name": "01 MEMBER INQUIRY",
+      "labels": [
+        "MAIN MENU"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 142,
+        "w": 95,
+        "h": 38
+      }
+    },
+    {
+      "ref": "f1c2",
+      "role": "link",
+      "name": "07 SUB-ACCOUNT",
+      "labels": [
+        "01 MEMBER INQUIRY"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 199,
+        "w": 146,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c3",
+      "role": "link",
+      "name": "99 SIGN OFF",
+      "labels": [
+        "07 SUB-ACCOUNT"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 237,
+        "w": 105,
+        "h": 19
+      }
+    },
+    {
+      "ref": "f1c4",
+      "role": "cell",
+      "name": "MERIDIAN CORE R7.4",
+      "labels": [],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 176,
+        "h": 22
+      }
+    },
+    {
+      "ref": "f1c5",
+      "role": "cell",
+      "name": "FIRST MERIDIAN FCU | NAV",
+      "labels": [
+        "MERIDIAN CORE R7.4"
+      ],
+      "container": [
+        "NAV"
+      ],
+      "frame": [
+        "nav"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 22,
+        "w": 176,
+        "h": 42
+      }
+    },
+    {
+      "ref": "f2c0",
+      "role": "cell",
+      "name": "MERIDIAN CORE R7.4",
+      "labels": [],
+      "container": [
+        "APPLICATION ERROR"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1103,
+        "h": 22
+      }
+    },
+    {
+      "ref": "f2c1",
+      "role": "cell",
+      "name": "FIRST MERIDIAN FCU | APPLICATION ERROR",
+      "labels": [
+        "MERIDIAN CORE R7.4"
+      ],
+      "container": [
+        "APPLICATION ERROR"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 22,
+        "w": 1103,
+        "h": 23
+      }
+    },
+    {
+      "ref": "f2c2",
+      "role": "cell",
+      "name": "MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»",
+      "labels": [],
+      "container": [
+        "APPLICATION ERROR"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 0,
+        "y": 45,
+        "w": 1103,
+        "h": 33
+      }
+    },
+    {
+      "ref": "f2c3",
+      "role": "text",
+      "name": "MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»",
+      "labels": [],
+      "container": [
+        "APPLICATION ERROR"
+      ],
+      "frame": [
+        "main"
+      ],
+      "ordinal": 0,
+      "enabled": true,
+      "bbox": {
+        "x": 4,
+        "y": 47,
+        "w": 1095,
+        "h": 29
+      }
+    }
+  ],
+  "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | APPLICATION ERROR MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»"
+}

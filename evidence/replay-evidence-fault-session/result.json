@@ -1,0 +1,90 @@
+{
+  "runId": "evidence-fault-session",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "success",
+  "outputs": {
+    "regular_savings_balance": "4,812.63",
+    "member_name": "WHITFIELD, DANA R",
+    "member_number": "12345",
+    "account_status": "ACTIVE"
+  },
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Start by opening the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 803,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field so the inquiry can be submitted.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 115,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"12345\" ~ /^12345$/ → true"
+      }
+    },
+    {
+      "stepId": "s3",
+      "intent": "The member number token is entered and service code is I (inquiry). Submit the inquiry to reach the member detail screen showing share/savings balances.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 131,
+      "target": "button exact(\"INQUIRE\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "all: ok"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:a7af558fa5d7f894",
+    "changed": false
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:27:41.929Z",
+    "endedAt": "2026-08-31T10:27:43.124Z",
+    "durationMs": 1195
+  },
+  "evidence": {
+    "dir": "evidence/replay-evidence-fault-session",
+    "journal": "evidence/replay-evidence-fault-session/journal.jsonl",
+    "screenshots": []
+  }
+}

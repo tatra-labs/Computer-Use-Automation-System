@@ -1,0 +1,75 @@
+{
+  "id": "int_d54a16b4",
+  "createdAt": "2026-08-31T10:27:45.081Z",
+  "status": "abandoned",
+  "mode": "replay",
+  "reason": "APP_FAULT",
+  "summary": "MERIDIAN CORE returned an unhandled application error (MCX-0500)",
+  "runId": "evidence-fault-apperror",
+  "sessionId": "ses_24a44572",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": null,
+  "step": {
+    "id": "s1",
+    "intent": "Start by opening the Member Inquiry function from the main menu to reach the member number entry screen.",
+    "action": "click"
+  },
+  "state": {
+    "locus": "http://127.0.0.1:8078/",
+    "title": "MERIDIAN CORE R7.4",
+    "visibleText": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | APPLICATION ERROR MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»",
+    "controlSummary": [
+      "link \"MAIN MENU\" @nav",
+      "link \"01 MEMBER INQUIRY\" @nav",
+      "link \"07 SUB-ACCOUNT\" @nav",
+      "link \"99 SIGN OFF\" @nav",
+      "cell \"MERIDIAN CORE R7.4\" @nav",
+      "cell \"FIRST MERIDIAN FCU | NAV\" @nav",
+      "cell \"MERIDIAN CORE R7.4\" @main",
+      "cell \"FIRST MERIDIAN FCU | APPLICATION ERROR\" @main",
+      "cell \"MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»\" @main",
+      "text \"MCX-0500 UNHANDLED APPLICATION ERROR. CONTACT SYSTEM SUPPORT. «custom»\" @main"
+    ]
+  },
+  "screenshot": "evidence/replay-evidence-fault-apperror/screens/006-escalation-app-fault.png",
+  "askedFor": [
+    "Clear the application error and return to the previous screen",
+    "Or abort the run so the caller sees a hard failure"
+  ],
+  "permitted": {
+    "actions": [
+      "navigate",
+      "click",
+      "type",
+      "select",
+      "press",
+      "dialog",
+      "waitFor",
+      "assert",
+      "extract",
+      "observe",
+      "screenshot"
+    ],
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ]
+  },
+  "lease": {
+    "owner": "automation",
+    "epoch": 1,
+    "holder": "replay:evidence-fault-apperror",
+    "since": "2026-08-31T10:27:44.896Z"
+  },
+  "resolution": {
+    "at": "2026-08-31T10:27:48.222Z",
+    "by": "system",
+    "decision": "aborted",
+    "note": "no operator responded within 3000ms",
+    "humanActions": []
+  }
+}

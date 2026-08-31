@@ -1,0 +1,96 @@
+{
+  "runId": "riverbend-lookup",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": "riverbend-cu",
+  "status": "success",
+  "outputs": {
+    "regular_savings_balance": "4,812.63",
+    "member_name": "WHITFIELD, DANA R",
+    "member_number": "12345",
+    "account_status": "ACTIVE"
+  },
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Start by opening the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 2,
+      "durationMs": 149,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field so the inquiry can be submitted.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 122,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.936
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"12345\" ~ /^12345$/ → true"
+      }
+    },
+    {
+      "stepId": "s3",
+      "intent": "The member number token is entered and service code is I (inquiry). Submit the inquiry to reach the member detail screen showing share/savings balances.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 184,
+      "target": "button exact(\"INQUIRE\")",
+      "match": {
+        "score": 0.936
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "all: ok"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    },
+    {
+      "code": "MAINTENANCE_NOTICE",
+      "attempt": 1,
+      "ok": true,
+      "detail": "text ~ /SYSTEM NOTICE\\s*\\d+/i → true"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:1cae7aaeff91236b",
+    "changed": true
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:27:49.872Z",
+    "endedAt": "2026-08-31T10:28:01.297Z",
+    "durationMs": 11425
+  },
+  "evidence": {
+    "dir": "evidence/replay-riverbend-lookup",
+    "journal": "evidence/replay-riverbend-lookup/journal.jsonl",
+    "screenshots": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "open_member_subaccount",
+  "title": "Open a secondary savings sub-account for a member and reach the posting confirmation",
+  "goal": "Open a new secondary savings sub-account for member {{memberId}} with nickname {{nickname}} and an initial deposit of {{initialDeposit}}, and reach the posting confirmation screen showing the reference number. Start from member inquiry: look the member up first, then use sub-account maintenance.",
+  "productId": "meridian-core",
+  "variant": "base",
+  "surface": "web",
+  "entry": "http://127.0.0.1:8078/",
+  "profile": "app-profiles/meridian-core.json",
+  "params": [
+    { "name": "memberId", "type": "integer", "description": "The institution's 5-digit member number", "sensitivity": "internal", "pattern": "^\\d{5}$", "example": "23456", "required": true, "value": "23456" },
+    { "name": "nickname", "type": "string", "description": "Operator-facing nickname for the new sub-account", "sensitivity": "internal", "pattern": "^[A-Za-z0-9 ._-]{1,20}$", "example": "HOLIDAY FUND", "required": true, "value": "VACATION FUND" },
+    { "name": "initialDeposit", "type": "money", "description": "Opening deposit amount in dollars", "sensitivity": "internal", "pattern": "^\\d+(\\.\\d{2})?$", "example": "25.00", "required": true, "value": "25.00" }
+  ],
+  "maxSteps": 16,
+  "policy": {
+    "//": "Posting an account opening is irreversible, so this capability may never run unattended and every invocation must carry an explicit confirmation.",
+    "maxDurationMs": 180000,
+    "allowUnattended": false,
+    "requiresConfirmation": ["irreversible"]
+  }
+}

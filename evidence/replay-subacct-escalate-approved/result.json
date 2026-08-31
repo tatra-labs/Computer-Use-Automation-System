@@ -1,0 +1,199 @@
+{
+  "runId": "subacct-replay-escalate2",
+  "capability": {
+    "id": "cap_open_member_subaccount",
+    "name": "open_member_subaccount",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "success",
+  "outputs": {
+    "reference_no": "SA-4411",
+    "posting_result": "ACCEPTED",
+    "member_no": "23456"
+  },
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Start with member inquiry as instructed. Click the MEMBER INQUIRY link in main frame.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 812,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field on the member inquiry screen.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 137,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"23456\" ~ /^23456$/ → true"
+      }
+    },
+    {
+      "stepId": "s3",
+      "intent": "Member number is entered; now submit the inquiry to load the member record before going to sub-account maintenance.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 149,
+      "target": "button exact(\"INQUIRE\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "text ~ /NAME:/i → true"
+      }
+    },
+    {
+      "stepId": "s4",
+      "intent": "Member record loaded. Now enter sub-account maintenance via the OPEN SUB-ACCOUNT link to begin opening the new savings sub-account.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 164,
+      "target": "link exact(\"OPEN SUB-ACCOUNT\")",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.781
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "text ~ /NICKNAME/i → true"
+      }
+    },
+    {
+      "stepId": "s5",
+      "intent": "SUB TYPE already defaults to SV2 - SECONDARY SAVINGS, which is what we want. Fill in the nickname field with the parameter token next.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 213,
+      "target": "textbox exact(\"NICKNAME:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"OP APPROVED\" ~ /^OP APPROVED$/ → true"
+      }
+    },
+    {
+      "stepId": "s6",
+      "intent": "Nickname is filled (harness substituted the token). Now enter the initial deposit amount token into the INIT DEP field before submitting.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 138,
+      "target": "textbox exact(\"INIT DEP:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"10.00\" ~ /^10.00$/ → true"
+      }
+    },
+    {
+      "stepId": "s7",
+      "intent": "All three fields are populated (SV2 sub type, nickname, initial deposit). Submitting opens the sub-account and posts the opening deposit — irreversible. The next screen should be the posting confirmation with a reference number.",
+      "action": "click",
+      "status": "failed",
+      "attempts": 1,
+      "durationMs": 12,
+      "target": "button exact(\"OPEN SUB-ACCOUNT\")",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.709
+      }
+    },
+    {
+      "stepId": "s7",
+      "intent": "All three fields are populated (SV2 sub type, nickname, initial deposit). Submitting opens the sub-account and posts the opening deposit — irreversible. The next screen should be the posting confirmation with a reference number.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 69,
+      "target": "button exact(\"OPEN SUB-ACCOUNT\")",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.709
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "dialog(confirm)"
+      }
+    },
+    {
+      "stepId": "s8",
+      "intent": "The confirm dialog is the final gate on the intended sub-account opening and deposit posting, which is exactly the goal. Accept it to post and reach the confirmation screen with the reference number.",
+      "action": "dialog",
+      "status": "failed",
+      "attempts": 1,
+      "durationMs": 0
+    },
+    {
+      "stepId": "s8",
+      "intent": "The confirm dialog is the final gate on the intended sub-account opening and deposit posting, which is exactly the goal. Accept it to post and reach the confirmation screen with the reference number.",
+      "action": "dialog",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 70,
+      "checkpoint": {
+        "ok": true,
+        "detail": "all: ok"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:a7af558fa5d7f894",
+    "changed": false
+  },
+  "timing": {
+    "startedAt": "2026-08-31T10:13:41.270Z",
+    "endedAt": "2026-08-31T10:13:43.768Z",
+    "durationMs": 2498
+  },
+  "evidence": {
+    "dir": "evidence/replay-subacct-replay-escalate2",
+    "journal": "evidence/replay-subacct-replay-escalate2/journal.jsonl",
+    "screenshots": [
+      "evidence/replay-subacct-replay-escalate2/screens/044-confirmation-required-s7.png",
+      "evidence/replay-subacct-replay-escalate2/screens/044-escalation-confirmation-required.png"
+    ],
+    "failureSnapshot": "evidence/replay-subacct-replay-escalate2/snapshot-confirmation-required-s8.html"
+  },
+  "escalation": {
+    "interventionId": "int_5eb5a158",
+    "reason": "CONFIRMATION_REQUIRED",
+    "stepId": "s8",
+    "resolvedBy": "sim.duty-officer",
+    "resumed": true
+  }
+}
