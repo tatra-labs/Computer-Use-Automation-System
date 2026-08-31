@@ -8,7 +8,10 @@ afterward with no model in the loop.
 Built for interface.ai's take-home ("Computer-Use Automation System"). See
 [`REPORT.md`](REPORT.md) for the design write-up (architecture, artifact schema,
 determinism & error handling, heterogeneity & multi-tenant, escalation & handoff, safety,
-cuts).
+cuts), and [`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md) for the reasoning path — the order
+things were built in, the decisions made before any code was written, and the real bugs
+found by testing against a live browser (with root causes), rather than just the
+justified end state.
 
 ## What's here
 
