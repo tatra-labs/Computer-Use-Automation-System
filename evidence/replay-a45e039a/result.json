@@ -1,0 +1,102 @@
+{
+  "runId": "a45e039a",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "success",
+  "outputs": {
+    "regular_savings_balance": "4,812.63",
+    "regular_savings_account_number": "0001",
+    "member_number": "12345",
+    "member_name": "WHITFIELD, DANA R",
+    "member_status": "ACTIVE"
+  },
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Open the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 2,
+      "durationMs": 163,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field on the member inquiry screen.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 123,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"12345\" ~ /^12345$/ → true"
+      }
+    },
+    {
+      "stepId": "s3",
+      "intent": "The MBR NO field is populated and service code is I (inquiry). Press INQUIRE to retrieve the member detail screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 169,
+      "target": "button exact(\"INQUIRE\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "text ~ /MEMBER DETAIL/i → true"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:dea83869599bb41b",
+    "changed": true
+  },
+  "timing": {
+    "startedAt": "2026-09-01T01:45:48.737Z",
+    "endedAt": "2026-09-01T01:46:29.079Z",
+    "durationMs": 40342
+  },
+  "evidence": {
+    "dir": "evidence/replay-a45e039a",
+    "journal": "evidence/replay-a45e039a/journal.jsonl",
+    "screenshots": [
+      "evidence/replay-a45e039a/screens/006-fault-app-error-page.png",
+      "evidence/replay-a45e039a/screens/006-escalation-app-fault.png"
+    ],
+    "failureSnapshot": "evidence/replay-a45e039a/snapshot-fault-app-error-page.html"
+  },
+  "escalation": {
+    "interventionId": "int_a0d546d6",
+    "reason": "APP_FAULT",
+    "stepId": "s1",
+    "resolvedBy": "operator:operator",
+    "resumed": true
+  }
+}

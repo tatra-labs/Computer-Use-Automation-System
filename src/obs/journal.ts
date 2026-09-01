@@ -3,9 +3,16 @@
  * JSONL journal of what happened and why, plus richer artefacts (screenshots,
  * observations, frame source) captured at decision points and on failure.
  *
- * Everything written here passes through the Redactor first. There is no second
- * path to disk, which is what makes "no regulated data is persisted" auditable
- * rather than aspirational.
+ * Every *text* artefact written here — the journal itself, observation
+ * snapshots, frame-source dumps — passes through the Redactor first, with no
+ * second path to disk. Screenshots are the one exception: they are raw
+ * viewport pixels, and the Redactor operates on strings, not images, so a
+ * value rendered on screen (a member's SSN on a detail screen, say) is not
+ * masked the way the same value would be in the journal line describing that
+ * screen. That's a real limit, not an oversight — see REPORT.md §6 — and it's
+ * why screenshots should be treated as the least-trusted evidence artifact for
+ * storage/retention purposes even though everything else in this directory is
+ * provably scrubbed.
  */
 import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';

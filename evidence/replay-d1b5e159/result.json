@@ -1,0 +1,73 @@
+{
+  "runId": "d1b5e159",
+  "capability": {
+    "id": "cap_lookup_member_savings_balance",
+    "name": "lookup_member_savings_balance",
+    "version": 1
+  },
+  "tenant": null,
+  "status": "business_outcome",
+  "outputs": {},
+  "steps": [
+    {
+      "stepId": "s1",
+      "intent": "Open the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "action": "click",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 776,
+      "target": "link exact(\"MEMBER INQUIRY\") frame[main]",
+      "match": {
+        "score": 0.97,
+        "runnerUp": 0.31
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "controlPresent → resolved"
+      }
+    },
+    {
+      "stepId": "s2",
+      "intent": "Enter the member number parameter token into the MBR NO field on the member inquiry screen.",
+      "action": "type",
+      "status": "ok",
+      "attempts": 1,
+      "durationMs": 138,
+      "target": "textbox exact(\"MBR NO:\")",
+      "match": {
+        "score": 0.97
+      },
+      "checkpoint": {
+        "ok": true,
+        "detail": "control value \"54321\" ~ /^54321$/ → true"
+      }
+    }
+  ],
+  "recoveries": [
+    {
+      "code": "SESSION_SIGNON_REQUIRED",
+      "attempt": 1,
+      "ok": true,
+      "detail": "any: controlPresent → resolved"
+    }
+  ],
+  "drift": {
+    "expected": "shape:a7af558fa5d7f894",
+    "observed": "shape:a7af558fa5d7f894",
+    "changed": false
+  },
+  "timing": {
+    "startedAt": "2026-09-01T01:36:34.426Z",
+    "endedAt": "2026-09-01T01:36:45.653Z",
+    "durationMs": 11227
+  },
+  "evidence": {
+    "dir": "evidence/replay-d1b5e159",
+    "journal": "evidence/replay-d1b5e159/journal.jsonl",
+    "screenshots": []
+  },
+  "outcome": {
+    "code": "RECORD_NOT_FOUND",
+    "message": "No member record exists for the supplied member number"
+  }
+}

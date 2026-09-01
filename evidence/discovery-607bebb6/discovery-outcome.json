@@ -1,0 +1,352 @@
+{
+  "status": "success",
+  "llmCalls": 4,
+  "humanAssisted": [],
+  "successText": "CURRENT BALANCE",
+  "recorded": [
+    {
+      "seq": 1,
+      "intent": "Open the Member Inquiry function from the main menu to reach the member number entry screen.",
+      "risk": "read",
+      "kind": "click",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [
+          "main"
+        ],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "link",
+        "name": {
+          "value": "MEMBER INQUIRY",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on accessible name \"MEMBER INQUIRY\"; disambiguated by frame path; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "pressEnter": false,
+      "expectAfter": "MEMBER INQUIRY",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:20e3242af26a7833",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MAIN MENU FUNCTION MENU CD FUNCTION 01 MEMBER INQUIRY 07 SUB-ACCOUNT MAINTENANCE",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "link\u001fMEMBER INQUIRY",
+          "link\u001fSUB-ACCOUNT MAINTENANCE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MAIN MENU",
+          "columnheader\u001fCD",
+          "columnheader\u001fFUNCTION",
+          "cell\u001f01",
+          "cell\u001f07"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 2,
+      "intent": "Enter the member number parameter token into the MBR NO field on the member inquiry screen.",
+      "risk": "read",
+      "kind": "type",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "textbox",
+        "name": {
+          "value": "MBR NO:",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on inferred caption (adjacent cell / column header) \"MBR NO:\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "text": {
+        "kind": "param",
+        "param": "memberId"
+      },
+      "pressEnter": false,
+      "expectAfter": "MEMBER DETAIL",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      }
+    },
+    {
+      "seq": 3,
+      "intent": "The MBR NO field is populated and service code is I (inquiry). Press INQUIRE to retrieve the member detail screen.",
+      "risk": "read",
+      "kind": "click",
+      "descriptor": {
+        "labels": [],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "button",
+        "name": {
+          "value": "INQUIRE",
+          "mode": "exact",
+          "alternatives": []
+        },
+        "note": "matched on accessible name \"INQUIRE\"; unambiguous on its own; re-resolved to the same control at 0.97"
+      },
+      "matchScore": 0.97,
+      "pressEnter": false,
+      "expectAfter": "MEMBER DETAIL",
+      "before": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e309032b4323c436",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER INQUIRY MBR NO: SVC CD: I - INQUIRY M - MAINT F3=EXIT F7=BKWD F8=FRWD",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "textbox\u001fMBR NO:",
+          "combobox\u001fSVC CD:",
+          "button\u001fINQUIRE",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER INQUIRY",
+          "cell\u001fMBR NO:",
+          "cell\u001fSVC CD:",
+          "cell\u001fMBR NO:"
+        ],
+        "dialog": false
+      },
+      "after": {
+        "locus": "http://127.0.0.1:8078/",
+        "title": "MERIDIAN CORE R7.4",
+        "fingerprint": "shape:e37db78deb036619",
+        "text": "MERIDIAN CORE R7.4 FIRST MERIDIAN FCU | NAV NAVIGATION MAIN MENU 01 MEMBER INQUIRY 07 SUB-ACCOUNT 99 SIGN OFF\nMERIDIAN CORE R7.4 FIRST MERIDIAN FCU | MEMBER DETAIL MBR: 12345 NAME: WHITFIELD, DANA R SSN: «ssn» BRANCH: 004 STATUS: ACTIVE SHARE / DEPOSIT ACCOUNTS ACCT TYPE CURRENT BALANCE OPENED 0001 REG SAVINGS 4,812.63 2016-03-11 0070 CHECKING 1,204.11 2018-09-02 OPEN SUB-ACCOUNT | NEW INQUIRY",
+        "keys": [
+          "link\u001fMAIN MENU",
+          "link\u001f01 MEMBER INQUIRY",
+          "link\u001f07 SUB-ACCOUNT",
+          "link\u001f99 SIGN OFF",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | NAV",
+          "link\u001fOPEN SUB-ACCOUNT",
+          "link\u001fNEW INQUIRY",
+          "cell\u001fMERIDIAN CORE R7.4",
+          "cell\u001fFIRST MERIDIAN FCU | MEMBER DETAIL",
+          "cell\u001fMBR:",
+          "cell\u001f12345",
+          "cell\u001fNAME:",
+          "cell\u001fWHITFIELD, DANA R",
+          "cell\u001fSSN:",
+          "cell\u001f«ssn»",
+          "cell\u001fBRANCH:",
+          "cell\u001f004",
+          "cell\u001fSTATUS:",
+          "cell\u001fACTIVE",
+          "columnheader\u001fACCT",
+          "columnheader\u001fTYPE",
+          "columnheader\u001fCURRENT BALANCE",
+          "columnheader\u001fOPENED",
+          "cell\u001f0001",
+          "cell\u001fREG SAVINGS",
+          "cell\u001f4,812.63",
+          "cell\u001f2016-03-11",
+          "cell\u001f0070",
+          "cell\u001fCHECKING",
+          "cell\u001f1,204.11",
+          "cell\u001f2018-09-02"
+        ],
+        "dialog": false
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "name": "regular_savings_balance",
+      "type": "string",
+      "description": "The current balance of the member's regular savings (share) account, acct 0001, as shown in the CURRENT BALANCE column of the member detail screen.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "REG SAVINGS",
+          "CURRENT BALANCE",
+          "0001"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "note": "matched on inferred caption (adjacent cell / column header) \"REG SAVINGS\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"REG SAVINGS\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "4,812.63"
+    },
+    {
+      "name": "regular_savings_account_number",
+      "type": "string",
+      "description": "The sub-account number of the member's regular savings share account on the member detail screen.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "ACCT",
+          "REG SAVINGS",
+          "4,812.63"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "note": "matched on inferred caption (adjacent cell / column header) \"ACCT\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"ACCT\"; disambiguated by labels (data cell: identified by row + column captions); re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "0001"
+    },
+    {
+      "name": "member_number",
+      "type": "string",
+      "description": "The institution's member number echoed back on the member detail screen, confirming the record that was retrieved.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "MBR:",
+          "NAME:",
+          "WHITFIELD, DANA R"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 1,
+        "note": "matched on inferred caption (adjacent cell / column header) \"MBR:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"MBR:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "12345"
+    },
+    {
+      "name": "member_name",
+      "type": "string",
+      "description": "The member's name as stored on the core, shown last-name-first on the member detail screen.",
+      "sensitivity": "pii",
+      "descriptor": {
+        "labels": [
+          "NAME:",
+          "MBR:",
+          "12345"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 3,
+        "note": "matched on inferred caption (adjacent cell / column header) \"NAME:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 3; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"NAME:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 3; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "WHITFIELD, DANA R"
+    },
+    {
+      "name": "member_status",
+      "type": "string",
+      "description": "The account status flag for the member record (e.g. ACTIVE), useful for confirming the membership is in good standing.",
+      "sensitivity": "internal",
+      "descriptor": {
+        "labels": [
+          "STATUS:"
+        ],
+        "container": [],
+        "frame": [],
+        "minScore": 0.55,
+        "minMargin": 0.08,
+        "role": "cell",
+        "ordinal": 1,
+        "note": "matched on inferred caption (adjacent cell / column header) \"STATUS:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76"
+      },
+      "rationale": "matched on inferred caption (adjacent cell / column header) \"STATUS:\"; disambiguated by labels (data cell: identified by row + column captions), ordinal 1; re-resolved to the same control at 0.76",
+      "verified": true,
+      "sampleValue": "ACTIVE"
+    }
+  ]
+}

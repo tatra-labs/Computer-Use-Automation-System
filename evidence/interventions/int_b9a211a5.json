@@ -1,0 +1,70 @@
+{
+  "id": "int_b9a211a5",
+  "createdAt": "2026-09-01T01:40:41.666Z",
+  "status": "resolved",
+  "mode": "discovery",
+  "reason": "CONFIRMATION_REQUIRED",
+  "summary": "A irreversible action needs approval: The confirm dialog is the final step of the intended goal: posting the new sub-account. Accepting it is irreversible but is exactly what the goal requires, and the posting confirmation with the reference number should follow.",
+  "runId": "4f7a729a",
+  "sessionId": "ses_8a412473",
+  "goal": "Open a new secondary savings sub-account for member {{memberId}} with nickname {{nickname}} and an initial deposit of {{initialDeposit}}, and reach the posting confirmation screen showing the reference number. Start from member inquiry: look the member up first, then use sub-account maintenance.",
+  "tenant": null,
+  "state": {
+    "locus": "http://127.0.0.1:8078/",
+    "title": "(dialog)",
+    "visibleText": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE.",
+    "controlSummary": [],
+    "pendingDialog": {
+      "kind": "confirm",
+      "message": "CONFIRM: POST NEW SUB-ACCOUNT? THIS ACTION IS IMMEDIATE."
+    }
+  },
+  "askedFor": [
+    "Approve this irreversible action",
+    "Or abort the discovery run"
+  ],
+  "permitted": {
+    "actions": [
+      "navigate",
+      "click",
+      "type",
+      "select",
+      "press",
+      "dialog",
+      "waitFor",
+      "assert",
+      "extract",
+      "observe",
+      "screenshot"
+    ],
+    "loci": [
+      "^https?://127\\.0\\.0\\.1:807[89](/|$|\\?)",
+      "^https?://localhost:807[89](/|$|\\?)"
+    ]
+  },
+  "lease": {
+    "owner": "automation",
+    "epoch": 5,
+    "holder": "automation",
+    "since": "2026-09-01T01:40:41.667Z",
+    "reason": "approved: sub-account opening is within this operator's authority"
+  },
+  "resolution": {
+    "at": "2026-09-01T01:40:41.667Z",
+    "by": "sim.duty-officer",
+    "decision": "resumed",
+    "note": "approved: sub-account opening is within this operator's authority",
+    "humanActions": [
+      {
+        "at": "2026-09-01T01:40:34.725Z",
+        "kind": "note",
+        "detail": "reviewed \"A irreversible action needs approval: Nickname and initial deposit tokens are entered and SUB TYPE is SV2. Submitting opens the sub-account and posts the opening deposit — irreversible.\" on the live screen and approved it"
+      },
+      {
+        "at": "2026-09-01T01:40:41.667Z",
+        "kind": "note",
+        "detail": "reviewed \"A irreversible action needs approval: The confirm dialog is the final step of the intended goal: posting the new sub-account. Accepting it is irreversible but is exactly what the goal requires, and the posting confirmation with the reference number should follow.\" on the live screen and approved it"
+      }
+    ]
+  }
+}

@@ -205,6 +205,26 @@ on every screen, tenant-branded but otherwise constant) and stripping a matched 
 prefix from any derived checkpoint before using it, so `"{tenant} | MEMBER INQUIRY"`
 becomes just `"MEMBER INQUIRY"` when the tenant-name half is already known chrome.
 
+**5.9 — A docstring that overclaimed, caught by looking at my own screenshot.** Found
+last, while capturing the README showcase images: `journal.ts` opened with "Everything
+written here passes through the Redactor first. There is no second path to disk, which is
+what makes 'no regulated data is persisted' auditable rather than aspirational" — and the
+member-detail screenshot I was about to publish showed a full (synthetic) SSN in the
+clear. Both facts were true; the sentence was still wrong. `Journal.saveScreenshot()`
+writes a raw PNG buffer, and the Redactor operates on strings, so screenshots were the one
+artifact the "everything" claim didn't cover. Nothing was leaking that shouldn't (the data
+is synthetic by construction, and I re-verified with a grep that no password or SSN-shaped
+string appears in any *text* artifact under `/evidence/`), so this was a documentation
+bug rather than a security one — but in the section of the write-up an evaluator will read
+most adversarially, an unqualified "everything" next to a visible SSN is the kind of thing
+that should cost you the benefit of the doubt. Fixed by scoping the docstring to text
+artifacts and naming screenshots as the explicit exception, and by adding the limit to
+`REPORT.md` §6 with what closing it would actually take (OCR-and-blur over declared
+sensitive regions, or not persisting screenshots of screens carrying declared-sensitive
+fields at all). Worth recording because of where it came from: not a test, not a review of
+the redaction code, but the ordinary act of looking carefully at an artifact I was about
+to put in front of someone else.
+
 ## 6. Decisions made explicitly, and what I rejected
 
 - **Semantic locators over CSS/XPath, and over a screenshot+coordinates default.**

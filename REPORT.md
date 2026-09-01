@@ -213,6 +213,14 @@ free text), no secrets vault (credentials are env vars by name only, never value
 storage security is the deployer's problem), and redaction is pattern- and
 registration-based — it will not catch a sensitive value in a shape neither mechanism
 anticipates. Approval is a single boolean state with a free-text note, not a workflow.
+**Screenshots are not redacted.** The Redactor scrubs strings — journal lines,
+observation JSON, frame-source HTML — but a screenshot is raw viewport pixels, so a
+value the app renders on screen (a member's SSN on a detail screen, in this project's own
+`/evidence/`) is visible in the PNG even though the exact same value is masked everywhere
+else that run wrote to disk. Closing this for real means either OCR-and-blur over known
+sensitive regions or not persisting screenshots for screens carrying declared-sensitive
+fields at all; I did neither, so treat every screenshot in `/evidence/` as the least-
+trusted artifact in the directory.
 
 ## 7. Cuts
 

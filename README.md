@@ -186,6 +186,147 @@ npm test                               # unit tests (resolver, predicates, redac
 npm run typecheck
 ```
 
+## Showcase: one real end-to-end run
+
+Everything below is from one un-cherry-picked pass through the system, using the exact
+commands from **Demo path** above — real `claude-opus-5` discovery against the live app,
+real deterministic replay, a real injected fault, and a real human taking control of the
+live session through the actual console (no mock UI, no pre-scripted screenshots).
+Screenshots are in [`docs/screenshots/`](docs/screenshots/); the runs that produced them
+are the fresh `evidence/discovery-*` and `evidence/replay-*` directories alongside the
+originally curated ones described in **Evidence** below. Synthetic data throughout — see
+`target-app/data.ts`.
+
+### 1. Discovery: an LLM learns the flow
+
+```
+npm run cua -- discover --goal goals/lookup-member-savings-balance.json --model claude-opus-5
+```
+
+One screenshot per turn — this is the model observing, deciding, and acting against the
+live frameset with no test ids and randomized element ids, with nothing to go on but
+role + accessible name + inferred caption, exactly as a human operator would read it:
+
+| | |
+|---|---|
+| ![main menu](docs/screenshots/01-main-menu.png) **1. Decides to open MEMBER INQUIRY** from the frameset's function menu. | ![blank inquiry form](docs/screenshots/02-inquiry-form-blank.png) **2. Reaches the inquiry screen**, decides to type the member number into `MBR NO:`. |
+| ![filled inquiry form](docs/screenshots/03-inquiry-form-filled.png) **3. `12345` entered**, decides to click `INQUIRE`. | ![member detail](docs/screenshots/04-member-detail.png) **4. Goal reached** — MEMBER DETAIL shows the REG SAVINGS balance (`4,812.63`) the goal asked for. |
+
+4 LLM calls, 3 actions, one compiled artifact. The compiler's own audit immediately
+earned its keep on this run — see **Determinism & error handling** in `REPORT.md`:
+
+```
+[compile] WARNING step s2: dropped the planner's expectation ("MEMBER DETAIL") — it was not literal screen text
+[compile] WARNING output "regular_savings_balance": dropped data-valued label(s) [0001]; locator re-verified without them
+```
+
+### 2. Deterministic replay: the same artifact, three ways — no model in the loop
+
+```
+npm run cua -- replay --capability capabilities/lookup_member_savings_balance.json --input memberId=12345
+npm run cua -- replay --capability capabilities/lookup_member_savings_balance.json --input memberId=23456
+npm run cua -- replay --capability capabilities/lookup_member_savings_balance.json --input memberId=54321
+```
+
+The recorded-for-`12345` artifact, replayed against a **different member it never saw
+during discovery**, still resolves every locator and returns the right data — proof it's
+a reusable capability, not a script pinned to one record:
+
+```json
+// memberId=23456 — same artifact, different member
+"outputs": { "regular_savings_balance": "150.00", "member_name": "OYELARAN, MARCUS T", ... }
+```
+
+And a member that doesn't exist is a **business outcome**, not a crash:
+
+![record not found](docs/screenshots/05-record-not-found.png)
+
+```json
+// memberId=54321
+"status": "business_outcome",
+"outcome": { "code": "RECORD_NOT_FOUND", "message": "No member record exists for the supplied member number" }
+```
+
+(Replay only saves a screenshot on failure/escalation by design — a success or a clean
+business outcome doesn't need a human to look at it. The image above was captured
+directly against the same live app for illustration; the JSON is the actual replay
+output.)
+
+### 3. Multi-tenant reuse: the same artifact, a different institution, zero re-recording
+
+```
+npm run cua -- replay --capability capabilities/lookup_member_savings_balance.json \
+  --tenant tenants/riverbend.json --input memberId=12345
+```
+
+Recorded once against the base tenant; replayed here against `riverbend` — different
+branding, different routes, a forced post-login compliance notice the base tenant doesn't
+have. The overlay maps the label differences (`SAVINGS BALANCE` vs `REG SAVINGS`,
+`SHARE DRAFT` vs `CHECKING`), and the run self-recovered the extra notice on its own
+(`recoveries: [..., "MAINTENANCE_NOTICE"]`, `drift.changed: true` — flagged, not fatal):
+
+![riverbend member detail](docs/screenshots/06-riverbend-member-detail.png)
+
+### 4. The irreversible flow, discovered live — and paused for a real decision
+
+```
+npm run cua -- discover --goal goals/open-member-subaccount.json --model claude-opus-5 \
+  --operator-sim approve --escalation-wait 60000
+```
+
+![subaccount form filled](docs/screenshots/07-subaccount-form-filled.png)
+
+The planner filled the form and decided to click `OPEN SUB-ACCOUNT` — an `irreversible`
+action. Policy requires confirmation for that risk class, so discovery **paused before
+the click executed** and raised a real intervention:
+
+![escalation raised](docs/screenshots/08-escalation-raised.png)
+
+`--operator-sim approve` stands in for a human here (see **Escalation & handoff** below
+for the real console); once approved, discovery clicked through, answered the resulting
+native confirmation dialog itself, and reached the posting confirmation:
+
+![subaccount confirmed](docs/screenshots/09-subaccount-confirmed.png)
+
+Reference `SA-4414`, result `ACCEPTED` — a real write against the mock core, gated the
+whole way by policy, not by hope.
+
+### 5. Replay hits a hard fault — a real human takes control of the live session
+
+```
+npm run cua -- replay --capability capabilities/lookup_member_savings_balance.json \
+  --input memberId=12345 --fault error500 --console 8090 --escalation-wait 90000
+```
+
+No `--operator-sim` this time — the console at `http://127.0.0.1:8090` is driven exactly
+the way a person would: open the queue, open the intervention, take control, act on the
+*live* page, hand back.
+
+| | |
+|---|---|
+| ![console queue](docs/screenshots/10-console-queue.png) **1. Queue** — `APP_FAULT`: the app returned MCX-0500 on the very first screen. | ![before control](docs/screenshots/11-console-detail-before-control.png) **2. Detail view** — the live broken page, full context (reason, capability, run/session id, locus, lease), before anyone has taken control. |
+| ![took control](docs/screenshots/12-console-took-control.png) **3. Take control** — the lease flips to `operator @epoch 2`; the live page is now clickable through the console. | ![operator navigated](docs/screenshots/13-console-operator-navigated.png) **4. Acts on the live page** — clicks `MAIN MENU` in the real nav frame. The fault fired *before* the automation had signed on, so this honestly lands on SIGN ON, not the menu — not scripted around. |
+
+The operator hands back with a note (typed through the console into the same audit
+trail the redactor protects):
+
+![resumed](docs/screenshots/14-console-resumed.png)
+
+Control returns to `automation @epoch 3`. The automation didn't need to be told how to
+finish: `SESSION_SIGNON_REQUIRED` is the same self-healing recovery rule every replay
+above already exercised, so it just signed back in with the service account and retried
+the interrupted step:
+
+```json
+"status": "success",
+"escalation": { "reason": "APP_FAULT", "resolvedBy": "operator:operator", "resumed": true },
+"recoveries": [{ "code": "SESSION_SIGNON_REQUIRED", "ok": true }]
+```
+
+A hard application fault, escalated with full context, resolved by a real person acting
+on the real live session, handed back, and finished — the seam Section 3.6 asks for,
+exercised end to end.
+
 ## Evidence
 
 `/evidence/` (committed) contains, from real runs against this repo's target app:
@@ -211,9 +352,16 @@ npm run typecheck
   byte-identical output shape (`deterministic: true`).
 - `interventions/` — the raised `InterventionRequest` records from the escalation runs
   above, including the resolution and the (redacted) human actions taken.
+- `discovery-607bebb6/`, `discovery-4f7a729a/`, `replay-703118b9/`, `replay-e695f8e7/`,
+  `replay-d1b5e159/`, `replay-ea8af214/`, `replay-0b5fc03d/`, `replay-a45e039a/` — the
+  fresh, un-cherry-picked run behind **Showcase** above (2026-08-31): the same discovery,
+  replay, multi-tenant, and escalation scenarios, captured start to finish in one sitting.
+  `replay-a45e039a` is the fullest one — a real console-driven escalation that resolves
+  cleanly to `success`, which the originally curated runs above don't otherwise cover.
 
 Every journal, observation snapshot, and frame-source dump under `/evidence/` has passed
-through the same `Redactor` that guards the live run — see `REPORT.md` §6.
+through the same `Redactor` that guards the live run — see `REPORT.md` §6. Screenshots are
+the one exception (raw pixels, not redacted text) — also documented there.
 
 ## Project layout
 
